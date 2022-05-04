@@ -19,10 +19,11 @@ def crawler(request):
     html = request.html
     container = html.find('div.JIIxO', first=True)
 
-    if len(container.find('a')) == 0:
+    products = container.find('a')
+    if len(products) == 0:
         return
 
-    for product in container.find('a'):
+    for product in products:
         try:
             title = product.find('h1', first=True).text
             price = product.find('.mGXnE._37W_B', first=True).text
@@ -75,13 +76,17 @@ def main():
     session = HTMLSession()
     page =  1
     while True: 
-        request = session.get(f'https://pt.aliexpress.com/category/201000006/computer-office.html&page={page}')
-        if not crawler(request):
+        try:
+            request = session.get(f'https://pt.aliexpress.com/category/201000006/computer-office.html?trafficChannel=main&catName=computer-office&CatId=201000006&ltype=wholesale&SortType=default&page={page}')
+            if not crawler(request):
+                break
+            
+            else:
+                page += 1
+
+        except KeyboardInterrupt:
             break
         
-        else:
-            page += 1
-
 
 if __name__ == '__main__':
     print('Starting infoseller...')
