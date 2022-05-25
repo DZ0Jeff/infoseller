@@ -45,7 +45,7 @@ def shopee_scrapper_sellers(seller_shopee_id):
     data1 = date.today()
 
     #asks for seller id.
-    # seller_shopee_id = input('Type in the seller id: \n')
+    seller_shopee_id = str(seller_shopee_id) #input('Type in the seller id: \n')
 
     logging.info(f'> [{seller_shopee_id}] consulting the api...')
     url_api_request = 'https://shopee.com.br/api/v4/recommend/recommend?bundle=shop_page_product_tab_main&limit=999&offset=0&section=shop_page_product_tab_main_sec&shopid=' + seller_shopee_id

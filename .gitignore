@@ -1,3 +1,4 @@
-status/*
+status/
 venv/
 __pycache__/
+*log
